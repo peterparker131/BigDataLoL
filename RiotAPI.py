@@ -40,6 +40,10 @@ class RiotAPI(object):
         api_url = Consts.URL['matchlist'].format(version=Consts.API_VERSIONS['summoner'], accountId=AccountID, apikey=self.api_key)
         return self._request(api_url)
     
+    def get_matchlistrecent(self, AccountID):
+        api_url = Consts.URL['matchlistrecent'].format(version=Consts.API_VERSIONS['summoner'], accountId=AccountID, apikey=self.api_key)
+        return self._request(api_url)
+    
     def get_specificMatchlist(self, AccountID, Season, QKey):
         api_url = Consts.URL['matchlistWithParams'].format(version=Consts.API_VERSIONS['summoner'], accountId=AccountID, SEASON=Season, QKEY=QKey, apikey=self.api_key) 
         return self._request(api_url)

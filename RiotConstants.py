@@ -10,6 +10,7 @@ URL = {
     'summoner_by_name': '/lol/summoner/v{version}/summoners/by-name/{accountId}?api_key={apikey}',
     'match': '/lol/match/v{version}/matches/{matchId}?api_key={apikey}',
     'matchlist': '/lol/match/v{version}/matchlists/by-account/{accountId}?api_key={apikey}',
+    'matchlistrecent': '/lol/match/v{version}/matchlists/by-account/{accountId}/recent?api_key={apikey}',
     'championStatus': '/lol/platform/v{version}/champions/{champId}?api_key={apikey}',
     'championName': '/lol/static-data/v3/champions/{champId}?api_key={apikey}',
     'matchlistWithParams': '/lol/match/v{version}/matchlists/by-account/{accountId}?queue={QKEY}&season={SEASON}&api_key={apikey}'

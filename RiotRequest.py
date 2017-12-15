@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 """
 Created on Tue Oct 17 17:54:43 2017
 
@@ -11,7 +11,9 @@ key = 'RGAPI-1d849512-91c5-4988-a8e4-48820ba41d3f'
 
 listOfQKeys={'Ranked Solo/Duo Queue': 420, 'Ranked Flex Queue': 440, 'Normal Draft Pick': 400, 'Normal Blind Pick':430}
 
-seasonList={'2014/2015': 7 , '2015/2016': 8 , '2016/2017': 9 , '2017/2018': 10}
+seasonList={'2014/2015': 7 , '2015/2016': 8 , '2016/2017': 9 , '2017/2018': 10} #Aktuelle Season ist Nummer 9
+
+
 
 def getSummonerAccountID(name, apiNumber):
     api = RiotAPI(apiNumber)
@@ -26,6 +28,11 @@ def getSummonerNamesOfMatch(accountID, apiNumber):
 def getMatchlist(accountID, apiNumber):
     api = RiotAPI(apiNumber)
     rec = api.get_matchlist(accountID)
+    return rec
+
+def getMatchlistRecent(accountID, apiNumber):
+    api = RiotAPI(apiNumber)
+    rec = api.get_matchlistrecent(accountID)
     return rec
 
 def getSpecificMatchlist(accountID, apiNumber, QKey, Season=9):

@@ -232,7 +232,7 @@ class findGames(tk.Frame):
         
         radioSeason1 = tk.Radiobutton(self, text="2014/2015", variable=self.seasonLocal, value="2014/2015").pack()
         radioSeason1 = tk.Radiobutton(self, text="2015/2016", variable=self.seasonLocal, value= "2015/2016").pack()
-        radioSeason1 = tk.Radiobutton(self, text="2016/2017", variable=self.seasonLocal, value="2016/2017").pack()
+        radioSeason1 = tk.Radiobutton(self, text="2016/2017-Aktuelle Season", variable=self.seasonLocal, value="2016/2017").pack()
         radioSeason1 = tk.Radiobutton(self, text="2017/2018", variable=self.seasonLocal, value="2017/2018").pack()
 
         button1 = tk.Button(self, text="Back to Start",
@@ -246,9 +246,11 @@ class findGames(tk.Frame):
         button3 = tk.Button(self, text="Back",
                             command=lambda: controller.showFrame(apiQuestion))
         button3.pack()
+
+
         
 class findLane(tk.Frame):
-
+    """Erster Versuch Kommentar zu schreiben """    
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         labelMain = tk.Label(self, text="Find Games", font=largeFont)
