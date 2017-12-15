@@ -250,7 +250,7 @@ class findGames(tk.Frame):
 
         
 class findLane(tk.Frame):
-    """Erster Versuch Kommentar zu schreiben """    
+  
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         labelMain = tk.Label(self, text="Find Games", font=largeFont)

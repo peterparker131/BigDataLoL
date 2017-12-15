@@ -11,14 +11,20 @@ Welcome to BigDataLoL's documentation!
    :caption: Contents:
 
 .. automodule:: RiotAPI   
-   
-.. autoclass::  RiotAPI
-	:members:
+   :members:
+   :undoc-members:
 
 .. automodule:: GuiNew
 	:members:
-
-
+	:undoc-members:
+	
+.. automodule:: RiotConstants
+	:members:
+	:undoc-members:
+	
+.. automodule:: RiotRequest
+	:members:
+	:undoc-members:
 
 Indices and tables
 ==================

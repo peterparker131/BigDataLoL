@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct 17 17:17:22 2017
-
-@author: lui
+Defining placeholders for get commands of RIOT API to be used in module RiotAPI 
 """
 
 URL = {

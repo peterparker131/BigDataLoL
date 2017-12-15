@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>RiotRequest &#8212; BigDataLoL 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for RiotRequest</h1><div class="highlight"><pre>
+<span></span> <span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Tue Oct 17 17:54:43 2017</span>
+
+<span class="sd">@author: lui</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">RiotAPI</span> <span class="k">import</span> <span class="n">RiotAPI</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;RGAPI-1d849512-91c5-4988-a8e4-48820ba41d3f&#39;</span>
+
+<span class="n">listOfQKeys</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Ranked Solo/Duo Queue&#39;</span><span class="p">:</span> <span class="mi">420</span><span class="p">,</span> <span class="s1">&#39;Ranked Flex Queue&#39;</span><span class="p">:</span> <span class="mi">440</span><span class="p">,</span> <span class="s1">&#39;Normal Draft Pick&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span> <span class="s1">&#39;Normal Blind Pick&#39;</span><span class="p">:</span><span class="mi">430</span><span class="p">}</span>
+
+<span class="n">seasonList</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;2014/2015&#39;</span><span class="p">:</span> <span class="mi">7</span> <span class="p">,</span> <span class="s1">&#39;2015/2016&#39;</span><span class="p">:</span> <span class="mi">8</span> <span class="p">,</span> <span class="s1">&#39;2016/2017&#39;</span><span class="p">:</span> <span class="mi">9</span> <span class="p">,</span> <span class="s1">&#39;2017/2018&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span> <span class="c1">#Aktuelle Season ist Nummer 9</span>
+
+
+
+<div class="viewcode-block" id="getSummonerAccountID"><a class="viewcode-back" href="../index.html#RiotRequest.getSummonerAccountID">[docs]</a><span class="k">def</span> <span class="nf">getSummonerAccountID</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">):</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">RiotAPI</span><span class="p">(</span><span class="n">apiNumber</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_summoner_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rec</span></div>
+
+<div class="viewcode-block" id="getSummonerNamesOfMatch"><a class="viewcode-back" href="../index.html#RiotRequest.getSummonerNamesOfMatch">[docs]</a><span class="k">def</span> <span class="nf">getSummonerNamesOfMatch</span><span class="p">(</span><span class="n">accountID</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">):</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">RiotAPI</span><span class="p">(</span><span class="n">apiNumber</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_summoner_of_match</span><span class="p">(</span><span class="n">accountID</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rec</span> </div>
+
+<div class="viewcode-block" id="getMatchlist"><a class="viewcode-back" href="../index.html#RiotRequest.getMatchlist">[docs]</a><span class="k">def</span> <span class="nf">getMatchlist</span><span class="p">(</span><span class="n">accountID</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">):</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">RiotAPI</span><span class="p">(</span><span class="n">apiNumber</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_matchlist</span><span class="p">(</span><span class="n">accountID</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rec</span></div>
+
+<div class="viewcode-block" id="getMatchlistRecent"><a class="viewcode-back" href="../index.html#RiotRequest.getMatchlistRecent">[docs]</a><span class="k">def</span> <span class="nf">getMatchlistRecent</span><span class="p">(</span><span class="n">accountID</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">):</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">RiotAPI</span><span class="p">(</span><span class="n">apiNumber</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_matchlistrecent</span><span class="p">(</span><span class="n">accountID</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rec</span></div>
+
+<div class="viewcode-block" id="getSpecificMatchlist"><a class="viewcode-back" href="../index.html#RiotRequest.getSpecificMatchlist">[docs]</a><span class="k">def</span> <span class="nf">getSpecificMatchlist</span><span class="p">(</span><span class="n">accountID</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">,</span> <span class="n">QKey</span><span class="p">,</span> <span class="n">Season</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">accountID</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">,</span> <span class="n">QKey</span><span class="p">,</span> <span class="n">Season</span><span class="p">)</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">RiotAPI</span><span class="p">(</span><span class="n">apiNumber</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_specificMatchlist</span><span class="p">(</span><span class="n">accountID</span><span class="p">,</span> <span class="n">Season</span><span class="p">,</span> <span class="n">QKey</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rec</span></div>
+
+
+<div class="viewcode-block" id="getChampionName"><a class="viewcode-back" href="../index.html#RiotRequest.getChampionName">[docs]</a><span class="k">def</span> <span class="nf">getChampionName</span><span class="p">(</span><span class="n">championID</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">):</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">RiotAPI</span><span class="p">(</span><span class="n">apiNumber</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_championName</span><span class="p">(</span><span class="n">championID</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rec</span></div>
+
+<div class="viewcode-block" id="sortMatchesToLane"><a class="viewcode-back" href="../index.html#RiotRequest.sortMatchesToLane">[docs]</a><span class="k">def</span> <span class="nf">sortMatchesToLane</span><span class="p">(</span><span class="n">matchList</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;Bottom&#39;</span><span class="p">):</span>
+    <span class="n">positiveCriterium</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">negativeCriterium</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">matchList</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">]:</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">element</span><span class="p">[</span><span class="s1">&#39;lane&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;BOTTOM&#39;</span><span class="p">:</span>
+            <span class="n">positiveCriterium</span> <span class="o">=</span> <span class="n">positiveCriterium</span> <span class="o">+</span> <span class="p">[</span><span class="n">element</span><span class="p">[</span><span class="s1">&#39;gameId&#39;</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">negativeCriterium</span> <span class="o">=</span> <span class="n">negativeCriterium</span> <span class="o">+</span> <span class="p">[</span><span class="n">element</span><span class="p">[</span><span class="s1">&#39;gameId&#39;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">positiveCriterium</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">positiveCriterium</span><span class="p">,</span><span class="n">negativeCriterium</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">positiveCriterium</span><span class="p">,</span><span class="n">negativeCriterium</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="sortMatchesByPartnerOld"><a class="viewcode-back" href="../index.html#RiotRequest.sortMatchesByPartnerOld">[docs]</a><span class="k">def</span> <span class="nf">sortMatchesByPartnerOld</span><span class="p">(</span><span class="n">matchList</span><span class="p">,</span> <span class="n">Partner</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">):</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">RiotAPI</span><span class="p">(</span><span class="n">apiNumber</span><span class="p">)</span>
+    <span class="n">positiveCriterium</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">negativeCriterium</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">matchList</span><span class="p">:</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_summoner_of_match</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+        <span class="n">flattenedNames</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">names</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Partner</span> <span class="ow">in</span> <span class="n">flattenedNames</span><span class="p">:</span>
+            <span class="n">positiveCriterium</span> <span class="o">=</span> <span class="n">positiveCriterium</span> <span class="o">+</span> <span class="p">[</span><span class="n">number</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">negativeCriterium</span> <span class="o">=</span> <span class="n">negativeCriterium</span> <span class="o">+</span> <span class="p">[</span><span class="n">number</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">positiveCriterium</span><span class="p">,</span><span class="n">negativeCriterium</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="sortMatchesByPartner"><a class="viewcode-back" href="../index.html#RiotRequest.sortMatchesByPartner">[docs]</a><span class="k">def</span> <span class="nf">sortMatchesByPartner</span><span class="p">(</span><span class="n">matchList</span><span class="p">,</span> <span class="n">Partner</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">):</span> <span class="c1">#assumes you don&#39;t have the matchInfo yet</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">RiotAPI</span><span class="p">(</span><span class="n">apiNumber</span><span class="p">)</span>
+    <span class="n">positiveCriterium</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">negativeCriterium</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">matchList</span><span class="p">:</span>
+        <span class="n">matchInfo</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_matchInfo</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+        <span class="n">summonerNames</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">matchInfo</span><span class="p">[</span><span class="s1">&#39;participantIdentities&#39;</span><span class="p">]:</span>
+            <span class="n">summonerNames</span> <span class="o">=</span> <span class="n">summonerNames</span> <span class="o">+</span> <span class="p">[</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;player&#39;</span><span class="p">][</span><span class="s1">&#39;summonerName&#39;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">Partner</span> <span class="ow">in</span> <span class="n">summonerNames</span><span class="p">:</span>
+            <span class="n">positiveCriterium</span> <span class="o">=</span> <span class="n">positiveCriterium</span> <span class="o">+</span> <span class="p">[[</span><span class="n">number</span><span class="p">,</span><span class="n">matchInfo</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">negativeCriterium</span> <span class="o">=</span> <span class="n">negativeCriterium</span> <span class="o">+</span> <span class="p">[[</span><span class="n">number</span><span class="p">,</span><span class="n">matchInfo</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">positiveCriterium</span><span class="p">,</span><span class="n">negativeCriterium</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="sortMatchesByPartnerNoRate"><a class="viewcode-back" href="../index.html#RiotRequest.sortMatchesByPartnerNoRate">[docs]</a><span class="k">def</span> <span class="nf">sortMatchesByPartnerNoRate</span><span class="p">(</span><span class="n">matchList</span><span class="p">,</span> <span class="n">Partner</span><span class="p">):</span>
+    <span class="n">positiveCriterium</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">negativeCriterium</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matchList</span><span class="p">:</span>
+        <span class="n">summonerNames</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">match</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;participantIdentities&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+            <span class="n">summonerNames</span> <span class="o">=</span> <span class="n">summonerNames</span> <span class="o">+</span> <span class="p">[</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;player&#39;</span><span class="p">][</span><span class="s1">&#39;summonerName&#39;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">Partner</span> <span class="ow">in</span> <span class="n">summonerNames</span><span class="p">:</span>
+            <span class="n">positiveCriterium</span> <span class="o">=</span> <span class="n">positiveCriterium</span> <span class="o">+</span> <span class="p">[</span><span class="n">match</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">negativeCriterium</span> <span class="o">=</span> <span class="n">negativeCriterium</span> <span class="o">+</span> <span class="p">[</span><span class="n">match</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">positiveCriterium</span><span class="p">,</span><span class="n">negativeCriterium</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="getGameInfos"><a class="viewcode-back" href="../index.html#RiotRequest.getGameInfos">[docs]</a><span class="k">def</span> <span class="nf">getGameInfos</span><span class="p">(</span><span class="n">matchList</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">):</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">RiotAPI</span><span class="p">(</span><span class="n">apiNumber</span><span class="p">)</span>
+    <span class="n">gameList</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">matchList</span><span class="p">:</span>
+        <span class="n">matchInfo</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_matchInfo</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+        <span class="n">gameList</span> <span class="o">=</span> <span class="n">gameList</span> <span class="o">+</span> <span class="p">[[</span><span class="n">number</span><span class="p">,</span><span class="n">matchInfo</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">gameList</span></div>
+
+
+<div class="viewcode-block" id="getMatchInfo"><a class="viewcode-back" href="../index.html#RiotRequest.getMatchInfo">[docs]</a><span class="k">def</span> <span class="nf">getMatchInfo</span><span class="p">(</span><span class="n">matchID</span><span class="p">,</span> <span class="n">apiNumber</span><span class="p">):</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">RiotAPI</span><span class="p">(</span><span class="n">apiNumber</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_matchInfo</span><span class="p">(</span><span class="n">matchID</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rec</span></div>
+
+<div class="viewcode-block" id="checkWinOrLoose"><a class="viewcode-back" href="../index.html#RiotRequest.checkWinOrLoose">[docs]</a><span class="k">def</span> <span class="nf">checkWinOrLoose</span><span class="p">(</span><span class="n">PlayerName</span><span class="p">,</span> <span class="n">MatchInfo</span><span class="p">):</span>
+    <span class="n">partId</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">MatchInfo</span><span class="p">[</span><span class="s1">&#39;participantIdentities&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">PlayerName</span> <span class="o">==</span> <span class="n">var</span><span class="p">[</span><span class="s1">&#39;player&#39;</span><span class="p">][</span><span class="s1">&#39;summonerName&#39;</span><span class="p">]:</span>
+            <span class="n">partId</span> <span class="o">=</span> <span class="n">var</span><span class="p">[</span><span class="s1">&#39;participantId&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">partId</span> <span class="o">=</span> <span class="n">partId</span>
+    <span class="k">if</span> <span class="n">partId</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span><span class="p">(</span><span class="s1">&#39;Error, Player not in Match&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">partId</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">MatchInfo</span><span class="p">[</span><span class="s1">&#39;teams&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;win&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">MatchInfo</span><span class="p">[</span><span class="s1">&#39;teams&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;win&#39;</span><span class="p">]</span></div>
+        
+<div class="viewcode-block" id="calculateWinrate"><a class="viewcode-back" href="../index.html#RiotRequest.calculateWinrate">[docs]</a><span class="k">def</span> <span class="nf">calculateWinrate</span><span class="p">(</span><span class="n">listOfGames</span><span class="p">,</span> <span class="n">PlayerName</span><span class="p">):</span>
+    <span class="n">counterGames</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">counterWins</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">counterLosses</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">listOfGames</span><span class="p">:</span>
+        <span class="n">counterGames</span> <span class="o">=</span> <span class="n">counterGames</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">matchInfo</span> <span class="o">=</span> <span class="n">var</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">checkWinOrLoose</span><span class="p">(</span><span class="n">PlayerName</span><span class="p">,</span> <span class="n">matchInfo</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Win&#39;</span><span class="p">:</span>
+            <span class="n">counterWins</span> <span class="o">=</span> <span class="n">counterWins</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">counterLosses</span> <span class="o">=</span> <span class="n">counterLosses</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">counterLosses</span> <span class="o">+</span> <span class="n">counterWins</span> <span class="o">==</span> <span class="n">counterGames</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">counterWins</span><span class="o">/</span><span class="n">counterGames</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;error&#39;</span></div>
+        
+    
+<div class="viewcode-block" id="fromMatchListGetMatchIds"><a class="viewcode-back" href="../index.html#RiotRequest.fromMatchListGetMatchIds">[docs]</a><span class="k">def</span> <span class="nf">fromMatchListGetMatchIds</span><span class="p">(</span><span class="n">matchList</span><span class="p">):</span>
+    <span class="n">ListWithIds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">matchList</span><span class="p">:</span>
+        <span class="n">ListWithIds</span> <span class="o">=</span> <span class="n">ListWithIds</span> <span class="o">+</span> <span class="p">[</span><span class="n">var</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">ListWithIds</span></div>
+
+<div class="viewcode-block" id="extractMatchesWithAnotherPartner"><a class="viewcode-back" href="../index.html#RiotRequest.extractMatchesWithAnotherPartner">[docs]</a><span class="k">def</span> <span class="nf">extractMatchesWithAnotherPartner</span><span class="p">(</span><span class="n">matchList</span><span class="p">,</span> <span class="n">AnotherPartner</span><span class="p">):</span>
+    <span class="n">positiveCriterium</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">negativeCriterium</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">matchList</span><span class="p">:</span>
+        <span class="n">summonerNames</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">var</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;participantIdentities&#39;</span><span class="p">]:</span>
+            <span class="n">summonerNames</span> <span class="o">=</span> <span class="n">summonerNames</span> <span class="o">+</span> <span class="p">[</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;player&#39;</span><span class="p">][</span><span class="s1">&#39;summonerName&#39;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">AnotherPartner</span> <span class="ow">in</span> <span class="n">summonerNames</span><span class="p">:</span>
+            <span class="n">positiveCriterium</span> <span class="o">=</span> <span class="n">positiveCriterium</span> <span class="o">+</span> <span class="p">[</span><span class="n">var</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">negativeCriterium</span> <span class="o">=</span> <span class="n">negativeCriterium</span> <span class="o">+</span> <span class="p">[</span><span class="n">var</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">positiveCriterium</span> <span class="p">,</span><span class="n">negativeCriterium</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="findParticipantID"><a class="viewcode-back" href="../index.html#RiotRequest.findParticipantID">[docs]</a><span class="k">def</span> <span class="nf">findParticipantID</span><span class="p">(</span><span class="n">Playername</span><span class="p">,</span> <span class="n">matchInfo</span><span class="p">):</span>
+    <span class="n">participantID</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">matchInfo</span><span class="p">[</span><span class="s1">&#39;participantIdentities&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">var</span><span class="p">[</span><span class="s1">&#39;player&#39;</span><span class="p">][</span><span class="s1">&#39;summonerName&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">Playername</span> <span class="p">:</span>
+            <span class="n">participantID</span> <span class="o">=</span> <span class="n">var</span><span class="p">[</span><span class="s1">&#39;participantId&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">participantID</span> <span class="o">=</span> <span class="n">participantID</span>
+    <span class="k">if</span> <span class="n">participantID</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;error: Summoner not found. Check PlayerName&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">participantID</span></div>
+
+<div class="viewcode-block" id="findPlayerStatsOfGame"><a class="viewcode-back" href="../index.html#RiotRequest.findPlayerStatsOfGame">[docs]</a><span class="k">def</span> <span class="nf">findPlayerStatsOfGame</span><span class="p">(</span><span class="n">PlayerName</span><span class="p">,</span> <span class="n">matchInfo</span><span class="p">):</span>
+    <span class="n">participantID</span> <span class="o">=</span> <span class="n">findParticipantID</span><span class="p">(</span><span class="n">PlayerName</span><span class="p">,</span> <span class="n">matchInfo</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">matchInfo</span><span class="p">[</span><span class="s1">&#39;participants&#39;</span><span class="p">][</span><span class="nb">int</span><span class="p">(</span><span class="n">participantID</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="calculateCSDiffAverage"><a class="viewcode-back" href="../index.html#RiotRequest.calculateCSDiffAverage">[docs]</a><span class="k">def</span> <span class="nf">calculateCSDiffAverage</span><span class="p">(</span><span class="n">matchList</span><span class="p">,</span> <span class="n">PlayerName</span><span class="p">):</span>
+    <span class="n">CSDiffEarly</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">CSDiffMiddle</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">gameCounter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">foundGamesEarly</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">foundGamesMiddle</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">matchList</span><span class="p">:</span>
+        <span class="n">gameCounter</span> <span class="o">=</span> <span class="n">gameCounter</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">findPlayerStatsOfGame</span><span class="p">(</span><span class="n">PlayerName</span><span class="p">,</span> <span class="n">var</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;csDiffPerMinDeltas&#39;</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;timeline&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s1">&#39;0-10&#39;</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;timeline&#39;</span><span class="p">][</span><span class="s1">&#39;csDiffPerMinDeltas&#39;</span><span class="p">]:</span>
+                <span class="n">CSDiffEarly</span> <span class="o">=</span> <span class="n">CSDiffEarly</span> <span class="o">+</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;timeline&#39;</span><span class="p">][</span><span class="s1">&#39;csDiffPerMinDeltas&#39;</span><span class="p">][</span><span class="s1">&#39;0-10&#39;</span><span class="p">]</span>
+                <span class="n">foundGamesEarly</span> <span class="o">=</span> <span class="n">foundGamesEarly</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="s1">&#39;10-20&#39;</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;timeline&#39;</span><span class="p">][</span><span class="s1">&#39;csDiffPerMinDeltas&#39;</span><span class="p">]:</span>
+                <span class="n">CSDiffMiddle</span> <span class="o">=</span> <span class="n">CSDiffEarly</span> <span class="o">+</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;timeline&#39;</span><span class="p">][</span><span class="s1">&#39;csDiffPerMinDeltas&#39;</span><span class="p">][</span><span class="s1">&#39;10-20&#39;</span><span class="p">]</span>
+                <span class="n">foundGamesMiddle</span> <span class="o">=</span> <span class="n">foundGamesMiddle</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">CSDiffEarly</span> <span class="o">=</span> <span class="n">CSDiffEarly</span><span class="o">/</span><span class="n">foundGamesEarly</span>
+    <span class="n">CSDiffMiddle</span> <span class="o">=</span> <span class="n">CSDiffMiddle</span><span class="o">/</span><span class="n">foundGamesMiddle</span>
+    <span class="k">return</span> <span class="p">[[</span><span class="n">foundGamesEarly</span><span class="p">,</span><span class="n">CSDiffEarly</span><span class="p">],[</span><span class="n">foundGamesMiddle</span><span class="p">,</span><span class="n">CSDiffMiddle</span><span class="p">]]</span></div>
+
+<div class="viewcode-block" id="calculateCSAverage"><a class="viewcode-back" href="../index.html#RiotRequest.calculateCSAverage">[docs]</a><span class="k">def</span> <span class="nf">calculateCSAverage</span><span class="p">(</span><span class="n">matchList</span><span class="p">,</span> <span class="n">PlayerName</span><span class="p">):</span>
+    <span class="n">CSDiffEarly</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">CSDiffMiddle</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">gameCounter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">foundGamesEarly</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">foundGamesMiddle</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">matchList</span><span class="p">:</span>
+        <span class="n">gameCounter</span> <span class="o">=</span> <span class="n">gameCounter</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">findPlayerStatsOfGame</span><span class="p">(</span><span class="n">PlayerName</span><span class="p">,</span> <span class="n">var</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;creepsPerMinDeltas&#39;</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;timeline&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s1">&#39;0-10&#39;</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;timeline&#39;</span><span class="p">][</span><span class="s1">&#39;creepsPerMinDeltas&#39;</span><span class="p">]:</span>
+                <span class="n">CSDiffEarly</span> <span class="o">=</span> <span class="n">CSDiffEarly</span> <span class="o">+</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;timeline&#39;</span><span class="p">][</span><span class="s1">&#39;creepsPerMinDeltas&#39;</span><span class="p">][</span><span class="s1">&#39;0-10&#39;</span><span class="p">]</span>
+                <span class="n">foundGamesEarly</span> <span class="o">=</span> <span class="n">foundGamesEarly</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="s1">&#39;10-20&#39;</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;timeline&#39;</span><span class="p">][</span><span class="s1">&#39;creepsPerMinDeltas&#39;</span><span class="p">]:</span>
+                <span class="n">CSDiffMiddle</span> <span class="o">=</span> <span class="n">CSDiffEarly</span> <span class="o">+</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;timeline&#39;</span><span class="p">][</span><span class="s1">&#39;creepsPerMinDeltas&#39;</span><span class="p">][</span><span class="s1">&#39;10-20&#39;</span><span class="p">]</span>
+                <span class="n">foundGamesMiddle</span> <span class="o">=</span> <span class="n">foundGamesMiddle</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">CSDiffEarly</span> <span class="o">=</span> <span class="n">CSDiffEarly</span><span class="o">/</span><span class="n">foundGamesEarly</span>
+    <span class="n">CSDiffMiddle</span> <span class="o">=</span> <span class="n">CSDiffMiddle</span><span class="o">/</span><span class="n">foundGamesMiddle</span>
+    <span class="k">return</span> <span class="p">[[</span><span class="n">foundGamesEarly</span><span class="p">,</span><span class="n">CSDiffEarly</span><span class="p">],[</span><span class="n">foundGamesMiddle</span><span class="p">,</span><span class="n">CSDiffMiddle</span><span class="p">]]</span> </div>
+
+<div class="viewcode-block" id="divideMatchlistIntoPackages"><a class="viewcode-back" href="../index.html#RiotRequest.divideMatchlistIntoPackages">[docs]</a><span class="k">def</span> <span class="nf">divideMatchlistIntoPackages</span><span class="p">(</span><span class="n">matchList</span><span class="p">,</span> <span class="n">packageSize</span><span class="p">):</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matchList</span><span class="p">)</span>
+    <span class="n">numberOfPackages</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span><span class="o">/</span><span class="n">packageSize</span><span class="p">)</span>  <span class="c1">#omits last package with unfull size</span>
+    <span class="n">masterList</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numberOfPackages</span><span class="p">):</span>
+        <span class="n">masterList</span> <span class="o">=</span> <span class="n">masterList</span> <span class="o">+</span> <span class="p">[[]]</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">listCounter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">matchList</span><span class="p">:</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="n">packageSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">masterList</span><span class="p">[</span><span class="n">listCounter</span><span class="p">]</span> <span class="o">=</span> <span class="n">masterList</span><span class="p">[</span><span class="n">listCounter</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">matchList</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">counter</span> <span class="o">+</span> <span class="n">packageSize</span><span class="o">*</span><span class="n">listCounter</span><span class="p">)]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">listCounter</span> <span class="o">=</span> <span class="n">listCounter</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">listCounter</span> <span class="o">&gt;=</span> <span class="n">numberOfPackages</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">masterList</span>
+    <span class="k">return</span> <span class="n">masterList</span></div>
+
+<div class="viewcode-block" id="createList"><a class="viewcode-back" href="../index.html#RiotRequest.createList">[docs]</a><span class="k">def</span> <span class="nf">createList</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="n">bigList</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">number</span><span class="p">:</span>
+        <span class="n">bigList</span> <span class="o">=</span> <span class="n">bigList</span> <span class="o">+</span> <span class="p">[[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">bigList</span></div>
+
+
+<span class="c1">#def calculatecsDevelpoment(matchList, PlayerName):</span>
+    
+          
+
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">bigList</span> <span class="o">=</span> <span class="n">createList</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">bigList</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">divideMatchlistIntoPackages</span><span class="p">(</span><span class="n">bigList</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+    
+<span class="c1">#    personalData = getSummonerAccountID(&#39;Stringtheorie&#39;, key)</span>
+<span class="c1">#    print(personalData)</span>
+<span class="c1">#    ID = personalData[&#39;accountId&#39;]</span>
+<span class="c1">#    matchList = getSpecificMatchlist(ID, key, 440,9)</span>
+<span class="c1">#    BottomLaneMatches=sortMatchesToLane(matchList)</span>
+<span class="c1">#    print(BottomLaneMatches)</span>
+<span class="c1">#    print(BottomLaneMatches)</span>
+<span class="c1">#    DuoList = sortMatchesByPartner(BottomLaneMatches[0], &#39;jackreacher133&#39;, key)</span>
+<span class="c1">#    MatchesWithAdam = DuoList[0]</span>
+<span class="c1">#    print(MatchesWithAdam)</span>
+<span class="c1">#    MatchesWithoutAdam = DuoList[1]</span>
+<span class="c1">#    List = extractMatchesWithAnotherPartner(MatchesWithAdam, &#39;Gololol&#39;)</span>
+<span class="c1">#    MatchesWithAdamAndGololol = List[0]</span>
+<span class="c1">#    MatchesWithAdamWithoutGololol = List[1]</span>
+<span class="c1">#    winrate = calculateWinrate(MatchesWithAdamAndGololol, &#39;Stringtheorie&#39;)</span>
+<span class="c1">#    print(winrate)</span>
+<span class="c1">#    winrate2 = calculateWinrate(MatchesWithAdamWithoutGololol, &#39;Stringtheorie&#39;)</span>
+<span class="c1">#    print(winrate2)</span>
+<span class="c1">#    print(calculateWinrate(MatchesWithoutAdam, &#39;Stringtheorie&#39;))</span>
+<span class="c1">#    print(calculateCSDiffAverage(MatchesWithAdamWithoutGololol, &#39;Stringtheorie&#39;))</span>
+<span class="c1">#    print(calculateCSAverage(MatchesWithAdamWithoutGololol, &#39;Stringtheorie&#39;))</span>
+<span class="c1">#    print(calculateCSDiffAverage(MatchesWithAdamAndGololol, &#39;Stringtheorie&#39;))</span>
+<span class="c1">#    print(calculateCSAverage(MatchesWithAdamAndGololol, &#39;Stringtheorie&#39;))</span>
+<span class="c1">#    gameInfo = getGameInfos(BottomLaneMatches[0], key)</span>
+<span class="c1">#    print(gameInfo)</span>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Adam & Lukas.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
