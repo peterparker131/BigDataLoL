@@ -12,6 +12,7 @@ Welcome to BigDataLoL's documentation!
 
 .. automodule:: RiotAPI   
    :members:
+   :undoc-members:
 
 .. automodule:: GuiNew
 	:members:

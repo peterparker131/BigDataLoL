@@ -238,8 +238,9 @@
                             <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">controller</span><span class="o">.</span><span class="n">showFrame</span><span class="p">(</span><span class="n">startPage</span><span class="p">))</span>
         <span class="n">button3</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span></div>
         
-        
+
 <div class="viewcode-block" id="findGames"><a class="viewcode-back" href="../index.html#GuiNew.findGames">[docs]</a><span class="k">class</span> <span class="nc">findGames</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;GUI for the Input of Summoner Name, Selection of Game Mode and Season&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">controller</span><span class="p">):</span>
         <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
@@ -284,7 +285,9 @@
         <span class="n">button1</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
                
         <span class="n">button2</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Continue&quot;</span><span class="p">,</span>
-                            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">merge3Functions</span><span class="p">(</span><span class="n">getMode</span><span class="p">,</span> <span class="n">getSummonerName</span><span class="p">,</span> <span class="n">getSeason</span><span class="p">,</span> <span class="n">findLane</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gameModeLocal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">summonerNameLocal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seasonLocal</span><span class="p">))</span>
+                            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">merge3Functions</span><span class="p">(</span><span class="n">getMode</span><span class="p">,</span>
+                            <span class="n">getSummonerName</span><span class="p">,</span> <span class="n">getSeason</span><span class="p">,</span> <span class="n">findLane</span><span class="p">,</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gameModeLocal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">summonerNameLocal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seasonLocal</span><span class="p">))</span>
         <span class="n">button2</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
         
         <span class="n">button3</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Back&quot;</span><span class="p">,</span>
@@ -294,7 +297,7 @@
 
         
 <div class="viewcode-block" id="findLane"><a class="viewcode-back" href="../index.html#GuiNew.findLane">[docs]</a><span class="k">class</span> <span class="nc">findLane</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Erster Versuch Kommentar zu schreiben &quot;&quot;&quot;</span>    
+    
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">controller</span><span class="p">):</span>
         <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
         <span class="n">labelMain</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Find Games&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">largeFont</span><span class="p">)</span>

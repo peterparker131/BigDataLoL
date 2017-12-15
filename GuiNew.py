@@ -176,26 +176,28 @@ class apiQuestion(tk.Frame):
         self.controller=controller
         self.apiKey = tk.StringVar() 
         
-        label = tk.Label(self, text="API Key", font=largeFont)
-        label.pack(pady=10,padx=10)
+        label = tk.Label(self, text="API Key", font=largeFont).pack(pady=10,padx=10)
         
-        entry = tk.Entry(self, textvariable=self.apiKey, width=50)
-        entry.pack()
+        
+        entry = tk.Entry(self, textvariable=self.apiKey, width=50).pack()
+        
         
         button1 = tk.Button(self, text="Back to Start",
-                            command=lambda: controller.showFrame(startPage))
-        button1.pack()
+                            command=lambda: controller.showFrame(startPage)).pack()
+        
         
         button2 = tk.Button(self, text="Continue",
-                            command=lambda: mergeFunction(getApi, findGames, self.controller, self.apiKey))
-        button2.pack()
+                            command=lambda: mergeFunction(getApi, findGames,
+                                              self.controller, self.apiKey)).pack()
+        
         
         button3 = tk.Button(self, text="Back",
-                            command=lambda: controller.showFrame(startPage))
-        button3.pack()
+                            command=lambda: controller.showFrame(startPage)).pack()
         
         
+
 class findGames(tk.Frame):
+    """GUI for the Input of Summoner Name, Selection of Game Mode and Season"""
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -214,43 +216,75 @@ class findGames(tk.Frame):
         self.summonerNameLocal = tk.StringVar()
         self.seasonLocal = tk.StringVar()
         
-        labelSummonerName = tk.Label(self, text="Please enter your summoner name:")
-        labelSummonerName.pack()
-        entrySummonerName = tk.Entry(self, textvariable=self.summonerNameLocal, width=30)
-        entrySummonerName.pack()
+        labelSummonerName = tk.Label(self,
+                                     text="Please enter your summoner name:").pack()
         
-        labelGameMode = tk.Label(self, text="Please enter a game Mode from the following List:")
-        labelGameMode.pack()
         
-        radioGameMode1 = tk.Radiobutton(self, text="Ranked Solo/Duo Queue", variable=self.gameModeLocal, value="Ranked Solo/Duo Queue").pack()
-        radioGameMode1 = tk.Radiobutton(self, text="Ranked Flex Queue", variable=self.gameModeLocal, value= "Ranked Flex Queue").pack()
-        radioGameMode1 = tk.Radiobutton(self, text="Normal Blind Pick", variable=self.gameModeLocal, value="Normal Blind Pick").pack()
-        radioGameMode1 = tk.Radiobutton(self, text="Normal Draft Pick", variable=self.gameModeLocal, value="Normal Draft Pick").pack()
+        entrySummonerName = tk.Entry(self, textvariable=self.summonerNameLocal,
+                                     width=30).pack()
+       
         
-        labelSeason = tk.Label(self, text="Please enter a season. The following Seasons are available:")
-        labelSeason.pack()
+        labelGameMode = tk.Label(self, text="Please enter a game Mode from the"
+                                 "following List:").pack()
         
-        radioSeason1 = tk.Radiobutton(self, text="2014/2015", variable=self.seasonLocal, value="2014/2015").pack()
-        radioSeason1 = tk.Radiobutton(self, text="2015/2016", variable=self.seasonLocal, value= "2015/2016").pack()
-        radioSeason1 = tk.Radiobutton(self, text="2016/2017-Aktuelle Season", variable=self.seasonLocal, value="2016/2017").pack()
-        radioSeason1 = tk.Radiobutton(self, text="2017/2018", variable=self.seasonLocal, value="2017/2018").pack()
+        
+        radioGameMode1 = tk.Radiobutton(self, text="Ranked Solo/Duo Queue",
+                                        variable=self.gameModeLocal,
+                                        value="Ranked Solo/Duo Queue").pack()
+        
+        radioGameMode1 = tk.Radiobutton(self, text="Ranked Flex Queue",
+                                        variable=self.gameModeLocal,
+                                        value= "Ranked Flex Queue").pack()
+        
+        radioGameMode1 = tk.Radiobutton(self, text="Normal Blind Pick",
+                                        variable=self.gameModeLocal,
+                                        value="Normal Blind Pick").pack()
+        
+        radioGameMode1 = tk.Radiobutton(self, text="Normal Draft Pick",
+                                        variable=self.gameModeLocal,
+                                        value="Normal Draft Pick").pack()
+        
+        labelSeason = tk.Label(self, text="Please enter a season. The following"
+                               "Seasons are available:").pack()
+       
+        
+        radioSeason1 = tk.Radiobutton(self, text="2014/2015",
+                                      variable=self.seasonLocal,
+                                      value="2014/2015").pack()
+        
+        radioSeason1 = tk.Radiobutton(self, text="2015/2016",
+                                      variable=self.seasonLocal,
+                                      value= "2015/2016").pack()
+        
+        radioSeason1 = tk.Radiobutton(self, text="2016/2017-Present season",
+                                      variable=self.seasonLocal,
+                                      value="2016/2017").pack()
+        
+        radioSeason1 = tk.Radiobutton(self, text="2017/2018",
+                                      variable=self.seasonLocal, value="2017/2018").pack()
 
-        button1 = tk.Button(self, text="Back to Start",
-                            command=lambda: controller.showFrame(startPage))
-        button1.pack()
-               
-        button2 = tk.Button(self, text="Continue",
-                            command=lambda: merge3Functions(getMode, getSummonerName, getSeason, findLane, self.controller, self.gameModeLocal, self.summonerNameLocal, self.seasonLocal))
-        button2.pack()
+        #button1 = 
+        tk.Button(self, text="Back to Start",
+                            command=lambda: controller.showFrame(startPage)).pack()
         
-        button3 = tk.Button(self, text="Back",
-                            command=lambda: controller.showFrame(apiQuestion))
-        button3.pack()
+               
+        #button2 = 
+        tk.Button(self, text="Continue",
+                            command=lambda: merge3Functions(getMode,
+                            getSummonerName, getSeason, findLane,
+                            self.controller, self.gameModeLocal,
+                            self.summonerNameLocal, self.seasonLocal)).pack()
+        
+        
+        #button3 = 
+        tk.Button(self, text="Back",
+                            command=lambda: controller.showFrame(apiQuestion)).pack()
+        
 
 
         
 class findLane(tk.Frame):
-  
+    
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         labelMain = tk.Label(self, text="Find Games", font=largeFont)
