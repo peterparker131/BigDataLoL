@@ -101,7 +101,9 @@ class App(tk.Tk):
         self.frames = {}
         
         #creates all frames using the properties of container
-        for F in (startPage, findGames, apiQuestion, findLane, calculate, conclusion, addPartner, conclusionWithPartner, winrateImprovement, csImprovement):
+        for F in (startPage, findGames, apiQuestion, findLane,
+                  calculate, conclusion, addPartner, conclusionWithPartner,
+                  winrateImprovement, csImprovement):
             frame = F(container, self)        
             self.frames[F] = frame       
             frame.grid(row=0, column=0, sticky='nsew')
@@ -163,6 +165,8 @@ class startPage(tk.Frame):
 
 class apiQuestion(tk.Frame):
     
+  
+        
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
         
@@ -182,14 +186,17 @@ class apiQuestion(tk.Frame):
         entry = tk.Entry(self, textvariable=self.apiKey, width=50).pack()
         
         
+        button4 = tk.Button(self, text="Load last key",#loads key from txt
+                            command=lambda: loadlastkey(self.controller)).pack()
+                            
+        
         button1 = tk.Button(self, text="Back to Start",
                             command=lambda: controller.showFrame(startPage)).pack()
         
         
-        button2 = tk.Button(self, text="Continue",
-                            command=lambda: mergeFunction(getApi, findGames,
-                                              self.controller, self.apiKey)).pack()
-        
+        button2 = tk.Button(self, text="Continue",#saves the present key in a txt file
+                            command=lambda: savekey(self.apiKey, getApi, findGames,
+                                                            self.controller)).pack()
         
         button3 = tk.Button(self, text="Back",
                             command=lambda: controller.showFrame(startPage)).pack()
@@ -408,7 +415,11 @@ class winrateImprovement(tk.Frame):
         label2.image = render
         label2.place(x=0, y=0, relwidth=1, relheight=1)
         
-        labelExplanation = tk.Label(self, text=' For the following analysis we split your most recent games into packages of 20 games per package. We analyze now each package to give you an overview over your latest improvements')
+        labelExplanation = tk.Label(self, text=' For the following analysis we'
+                                    'split your most recent games into packages'
+                                    'of 20 games per package. We analyze now'
+                                    'each package to give you an overview over'
+                                    'your latest improvements')
         labelExplanation.pack()
         
         labelWinratePackage = tk.Label(self)
@@ -553,6 +564,16 @@ class conclusionWithPartner(tk.Frame):
         button2.pack()
     
     
+def savekey(data, getApi, findGames, controller):  #saves key for next use
+    np.savetxt('key.txt',(np.array([data.get(),])), fmt='%1s')
+    mergeFunction(getApi, findGames,controller, data)
+
+def loadlastkey(controller):
+    with open("key.txt", "r") as x:
+        controller.api=x.read().replace('\n','')
+    controller.showFrame(findGames)
+    
+
 def getApi(name, controller):
     var=name.get()
     controller.api = var   
