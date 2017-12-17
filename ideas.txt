@@ -1,0 +1,4 @@
+Exclude dc/afk short games from the winrate-> maybe minimum game length-> 10 min
+
+error handling for calculate winrate-> return counterWins/counterGames-> avoid division by 0
+

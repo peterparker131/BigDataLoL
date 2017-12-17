@@ -426,21 +426,21 @@ class winrateImprovement(tk.Frame):
         controller.packageLabel['winrate'] = labelWinratePackage
         
         #inverts list
-        reshuffleWinrate = []
-        i = 1
-        while i <= len(controller.winratePackages):
-            reshuffleWinrate = reshuffleWinrate + [controller.winratePackages[-i]]
+        #reshuffleWinrate = []
+        #i = 1
+        #while i <= len(controller.winratePackages):
+        #    reshuffleWinrate = reshuffleWinrate + [controller.winratePackages[-i]]
         
         #Hier kommt ein MatplotLib Graph rein
         
-        winrateFigure = mp.figure.Figure(figsize=(1,1), dpi=100)
-        fig = winrateFigure.add_subplot(111)
-        fig.plot(reshuffleWinrate, 'bo')
+        #winrateFigure = mp.figure.Figure(figsize=(1,1), dpi=100)
+        #fig = winrateFigure.add_subplot(111)
+        #fig.plot(reshuffleWinrate, 'bo')
         
-        winrateCanvas = FigureCanvasTkAgg(winrateFigure, self)
-        winrateCanvas.show()
-        winrateCanvas._tkcanvas.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
-        winrateCanvas._tkcanvas.pack()
+        #winrateCanvas = FigureCanvasTkAgg(winrateFigure, self)
+        #winrateCanvas.show()
+        #winrateCanvas._tkcanvas.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+        #winrateCanvas._tkcanvas.pack()
         
         
         buttonCSAnalysis = tk.Button(self)
@@ -620,13 +620,22 @@ def merge3Functions(f, g, h, window, controller, argument1, argument2, argument3
     
 def mergePackageAnalysis(f, window, controller, argument1):
     f(argument1, controller)
-    controller.placeLabel(controller.packageLabel['winrate'], 'Your winrates starting with your latest games are: ', str(controller.winratePackages,2))
+    controller.placeLabel(controller.packageLabel['winrate'], 'Your winrates starting with your latest games are: ',
+                          ' '.join(str(e) for e in controller.winratePackages))
     controller.placeButton(controller.buttons['csAnalysis'], 'Proceed to cs Analysis',
                            lambda: controller.showFrame(csImprovement))
-    controller.placeLabel(controller.packageLabel['csDiffAt10'], 'Your cs difference after 10 min starting with your latest games are: ', str(controller.csAt10Packages,2))
-    controller.placeLabel(controller.packageLabel['csDiffAt20'], 'Your cs difference after 20 min starting with your latest games are: ', str(controller.csAt20Packages,2))
-    controller.placeLabel(controller.packageLabel['csAt10'], 'Your overall cs after 10 min starting with your latest games are: ', str(controller.csAt10Packages,2))
-    controller.placeLabel(controller.packageLabel['csAt20'], 'Your overall cs after 20 min starting with your latest games are: ', str(controller.csAt20Packages,2))
+    controller.placeLabel(controller.packageLabel['csDiffAt10'],
+                          'Your cs difference after 10 min starting with your latest games are: ',
+                          ' '.join(str(e) for e in controller.csAt10Packages))
+    controller.placeLabel(controller.packageLabel['csDiffAt20'],
+                          'Your cs difference after 20 min starting with your latest games are: ',
+                          ' '.join(str(e) for e in controller.csAt20Packages))
+    controller.placeLabel(controller.packageLabel['csAt10'],
+                          'Your overall cs after 10 min starting with your latest games are: ',
+                          ' '.join(str(e) for e in controller.csAt10Packages))
+    controller.placeLabel(controller.packageLabel['csAt20'],
+                          'Your overall cs after 20 min starting with your latest games are: ',
+                          ' '.join(str(e) for e in controller.csAt20Packages))
     controller.placeButton(controller.buttons['backToConclusionFromAnalysis'], 'Back to overall conclusion',
                            lambda: controller.showFrame(conclusion))
     controller.placeButton(controller.buttons['quitFromAnalysis'], 'Quit',

@@ -133,8 +133,11 @@ def checkWinOrLoose(PlayerName, MatchInfo):
             return MatchInfo['teams'][0]['win']
         else:
             return MatchInfo['teams'][1]['win']
-        
-def calculateWinrate(listOfGames, PlayerName):
+
+
+     
+def calculateWinrate(listOfGames, PlayerName):          
+    """returns float or string in case of error """  
     counterGames = 0
     counterWins = 0
     counterLosses = 0
