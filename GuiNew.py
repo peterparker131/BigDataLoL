@@ -26,6 +26,8 @@ import Zeug as zg
 
 import matplotlib as mp
 
+import matplotlib.pyplot as plt
+
 mp.use("TkAgg")
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 
@@ -424,23 +426,28 @@ class winrateImprovement(tk.Frame):
         
         labelWinratePackage = tk.Label(self)
         controller.packageLabel['winrate'] = labelWinratePackage
-        
-        #inverts list
-        #reshuffleWinrate = []
+        #print(controller.winratePackages)
+        #inverts list--> wozu?
+        reshuffleWinrate = [len(controller.winratePackages)]
+        reshuffleWinrate=list(reversed(controller.winratePackages))
+        #print(reshuffleWinrate)
         #i = 1
         #while i <= len(controller.winratePackages):
         #    reshuffleWinrate = reshuffleWinrate + [controller.winratePackages[-i]]
         
         #Hier kommt ein MatplotLib Graph rein
+        np.savetxt('bla.txt', controller.winratePackages)
+        plt.plot(range(1,len(reshuffleWinrate)),reshuffleWinrate, 'bo')
+        plt.savefig("bla.pdf")
+        plt.close()
+        winrateFigure = mp.figure.Figure(figsize=(1,1), dpi=100)
+        fig = winrateFigure.add_subplot(111)
+        fig.plot(range(1,len(reshuffleWinrate)),reshuffleWinrate, 'bo')
         
-        #winrateFigure = mp.figure.Figure(figsize=(1,1), dpi=100)
-        #fig = winrateFigure.add_subplot(111)
-        #fig.plot(reshuffleWinrate, 'bo')
-        
-        #winrateCanvas = FigureCanvasTkAgg(winrateFigure, self)
-        #winrateCanvas.show()
-        #winrateCanvas._tkcanvas.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
-        #winrateCanvas._tkcanvas.pack()
+        winrateCanvas = FigureCanvasTkAgg(winrateFigure, self)
+        winrateCanvas.show()
+        winrateCanvas._tkcanvas.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+        winrateCanvas._tkcanvas.pack()
         
         
         buttonCSAnalysis = tk.Button(self)
@@ -462,7 +469,9 @@ class csImprovement(tk.Frame):
         label2.image = render
         label2.place(x=0, y=0, relwidth=1, relheight=1)
         
-        labelExplanation = tk.Label(self, text='Now we will analyse your overall cs development aswell as your cs development compared to your lane opponent.')
+        labelExplanation = tk.Label(self, text='Now we will analyse your overall'
+                                    'cs development aswell as your cs development'
+                                    'compared to your lane opponent.')
         labelExplanation.pack()
         
         labelcsAt10Package = tk.Label(self)

@@ -2,3 +2,7 @@ Exclude dc/afk short games from the winrate-> maybe minimum game length-> 10 min
 
 error handling for calculate winrate-> return counterWins/counterGames-> avoid division by 0
 
+-------------------------------------
+
+Da läuft noch etwas schief bei 398 GuiNew-> die Klasse winrateImprovement bekommt nicht den korrekten controller, sodass controller.winratePackages leer ist. Demnach kann auch nicht sinnvoll geplotet werden.
+Eventuell bei mergePackageAnalysis ansetzen.
